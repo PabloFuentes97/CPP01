@@ -40,7 +40,5 @@ void Harl::complain( std::string level )
 	if (i == 4) {
 		std::cout << level << " doesn't exists" << std::endl;
 		return ; }
-	while (i < 4) {
-		(this->*ptr[i])();
-		i++; }
+	(this->*ptr[i])();
 }
