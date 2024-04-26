@@ -20,32 +20,28 @@ int	main(int argc, char **argv)
 		return (3);
 	}
 	//check if word to find is empty
-	std::string	sust = argv[2];
+	std::string	find = argv[2];
+	std::string	sust = argv[3];
 	if (sust.empty())
 	{
 		std::cout << "Empty word to search" << std::endl;
 		return (4);
 	}
 	//read org file and write in replace file
-	int	sustLen = sust.length();
+	int	findLen = find.length();
 	std::string	line;
-	while (Read)
+	int	i;
+	while (!Read.eof())
 	{
 		std::getline(Read, line);
-		int	i = 0;
-		while (line[i])
+		
+		i = line.find(find, 0);
+		while (i != -1)
 		{
-			if (!line.compare(i, sustLen, sust))
-			{
-				Write << argv[3];
-				i += sustLen;
-			}
-			else
-			{
-				Write << line[i];
-				i++;
-			}	
+			line.replace(i, findLen, sust);
+			i = line.find(find, 0);
 		}
+		Write << line << "\n";
 	}
 	//close read and write streams
 	Read.close();
